@@ -20,11 +20,10 @@ procedure Sierpinski is
    procedure Step;
 
    procedure Clear is
-      Buffer : constant Bitmap_Buffer'Class := Display.Get_Hidden_Buffer (1);
    begin
       for Y in 0 .. LCD_H loop
          for X in 0 .. LCD_W loop
-            Buffer.Set_Pixel (X, Y, Blue_Color);
+            Display.Hidden_Buffer (1).Set_Pixel ((X, Y), Blue_Color);
          end loop;
       end loop;
    end Clear;
@@ -36,10 +35,9 @@ procedure Sierpinski is
    Ys : constant array (0 .. 2) of Float := (0.0, Float (LCD_H), Float (LCD_H));
 
    procedure Step is
-      Buffer : constant Bitmap_Buffer'Class := Display.Get_Hidden_Buffer (1);
       I : Natural;
    begin
-      Buffer.Set_Pixel (Integer (X), Integer (Y), White_Color);
+      Display.Hidden_Buffer (1).Set_Pixel ((Integer (X), Integer (Y)), White_Color);
       I := Natural (Random mod 3);
       X := (X + Xs (I)) * 0.5;
       Y := (Y + Ys (I)) * 0.5;
