@@ -5,4 +5,4 @@ Projekt zawiera podmoduly zatem klonuj go z opcja `--recursive`:
 
 `git clone --recursive https://github.com/przemko/ada-arm.git`
 
-Przed korzystaniem z przykładów należy zainstalować GNAT ze strony http://libre.adacore.com (wybrać ARM ELF format (hosted on Linux/Windows)).
+Przed korzystaniem z przykładów należy zainstalować GNAT ze strony http://libre.adacore.com (wybrać **ARM ELF format (hosted on Linux/Windows**)).
