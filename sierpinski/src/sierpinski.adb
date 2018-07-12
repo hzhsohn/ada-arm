@@ -9,8 +9,8 @@ with STM32.RNG.Polling; use STM32.RNG.Polling;
 procedure Sierpinski is
 
    Format : constant HAL.Framebuffer.FB_Color_Mode := RGB_565;
-   White_Color : constant Unsigned_32 := 16#FFFF#;
-   Blue_Color : constant Unsigned_32 := 16#001F#;
+   White_Color : constant UInt32 := 16#FFFF#;
+   Blue_Color : constant UInt32 := 16#001F#;
    LCD_W : constant := (if LCD_Natural_Width > LCD_Natural_Height
                         then LCD_Natural_Width else LCD_Natural_Height);
    LCD_H : constant := (if LCD_Natural_Width > LCD_Natural_Height
