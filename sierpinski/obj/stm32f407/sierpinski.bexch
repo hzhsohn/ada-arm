@@ -1,0 +1,31 @@
+[MAPPING FILE]
+C:\Users\han.zh\AppData\Local\Temp\GNAT-TEMP-000004.TMP
+[TOOLCHAIN VERSION]
+ada
+GNAT 2018
+[MAIN BASE NAME]
+sierpinski
+[COMPILER PATH]
+c:\gnat\2018-arm-elf\bin\arm-eabi-gcc.exe
+[COMPILER LEADING SWITCHES]
+-c
+-x
+ada
+-gnatA
+--RTS=C:\gnat\2018-arm-elf\arm-eabi\lib\gnat\zfp-stm32f4\
+-mlittle-endian
+-mhard-float
+-mcpu=cortex-m4
+-mfpu=fpv4-sp-d16
+-mthumb
+[MAIN DEPENDENCY FILE]
+C:\Users\han.zh\Desktop\ada-arm\sierpinski\obj\stm32f407\sierpinski.ali
+[DEPENDENCY FILES]
+[BINDING OPTIONS]
+gnatbind_prefix=arm-eabi-
+--RTS=C:\gnat\2018-arm-elf\arm-eabi\lib\gnat\zfp-stm32f4\
+[PROJECT FILES]
+C:\Users\han.zh\Desktop\ada-arm\sierpinski\sierpinski_stm32f407.gpr
+20181002220446
+C:\Users\han.zh\Desktop\ada-arm\Ada_Drivers_Library\boards\stm32f407_discovery\stm32f407_discovery_full.gpr
+20181001204926

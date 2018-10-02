@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<Locations >
+  <Project >
+    <file_marker column=" 1" line=" 19" >
+      <vfs_project>C:\Users\han.zh\Desktop\ada-arm\sierpinski\sierpinski_stm32f407.gpr</vfs_project>
+      <vfs_file>C:\Users\han.zh\Desktop\ada-arm\sierpinski\src\sierpinski.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 35" >
+      <vfs_project>C:\Users\han.zh\Desktop\ada-arm\Ada_Drivers_Library\boards\stm32f407_discovery\stm32f407_discovery_full.gpr</vfs_project>
+      <vfs_file>C:\Users\han.zh\Desktop\ada-arm\Ada_Drivers_Library\middleware\src\ravenscar-common\ravenscar_time.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project>C:\Users\han.zh\Desktop\ada-arm\sierpinski\sierpinski_stm32f407.gpr</vfs_project>
+      <vfs_file>C:\Users\han.zh\Desktop\ada-arm\sierpinski\src\sierpinski.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 12" >
+      <vfs_project>C:\Users\han.zh\Desktop\ada-arm\sierpinski\sierpinski_stm32f407.gpr</vfs_project>
+      <vfs_file>C:\Users\han.zh\Desktop\ada-arm\sierpinski\src\sierpinski.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 6" line=" 4" >
+      <vfs_project>C:\Users\han.zh\Desktop\ada-arm\sierpinski\sierpinski_stm32f407.gpr</vfs_project>
+      <vfs_file>C:\Users\han.zh\Desktop\ada-arm\sierpinski\src\sierpinski.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 19" >
+      <vfs_project>C:\Users\han.zh\Desktop\ada-arm\sierpinski\sierpinski_stm32f407.gpr</vfs_project>
+      <vfs_file>C:\Users\han.zh\Desktop\ada-arm\sierpinski\src\sierpinski.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 6" line=" 4" >
+      <vfs_project>C:\Users\han.zh\Desktop\ada-arm\sierpinski\sierpinski_stm32f407.gpr</vfs_project>
+      <vfs_file>C:\Users\han.zh\Desktop\ada-arm\sierpinski\src\sierpinski.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 19" line=" 13" >
+      <vfs_project>C:\Users\han.zh\Desktop\ada-arm\sierpinski\sierpinski_stm32f407.gpr</vfs_project>
+      <vfs_file>C:\Users\han.zh\Desktop\ada-arm\sierpinski\src\sierpinski.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 6" line=" 4" >
+      <vfs_project>C:\Users\han.zh\Desktop\ada-arm\sierpinski\sierpinski_stm32f407.gpr</vfs_project>
+      <vfs_file>C:\Users\han.zh\Desktop\ada-arm\sierpinski\src\sierpinski.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 18" >
+      <vfs_project>C:\Users\han.zh\Desktop\ada-arm\sierpinski\sierpinski_stm32f407.gpr</vfs_project>
+      <vfs_file>C:\Users\han.zh\Desktop\ada-arm\sierpinski\src\sierpinski.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 6" line=" 4" >
+      <vfs_project>C:\Users\han.zh\Desktop\ada-arm\sierpinski\sierpinski_stm32f407.gpr</vfs_project>
+      <vfs_file>C:\Users\han.zh\Desktop\ada-arm\sierpinski\src\sierpinski.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 18" >
+      <vfs_project>C:\Users\han.zh\Desktop\ada-arm\sierpinski\sierpinski_stm32f407.gpr</vfs_project>
+      <vfs_file>C:\Users\han.zh\Desktop\ada-arm\sierpinski\src\sierpinski.adb</vfs_file>
+    </file_marker>
+    <file_marker current="true" column=" 6" line=" 4" >
+      <vfs_project>C:\Users\han.zh\Desktop\ada-arm\sierpinski\sierpinski_stm32f407.gpr</vfs_project>
+      <vfs_file>C:\Users\han.zh\Desktop\ada-arm\sierpinski\src\sierpinski.adb</vfs_file>
+    </file_marker>
+  </Project>
+</Locations>

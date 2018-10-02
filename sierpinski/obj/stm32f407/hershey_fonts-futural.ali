@@ -1,0 +1,32 @@
+V "GNAT Lib v2018"
+A -gnatA
+A --RTS=C:\gnat\2018-arm-elf\arm-eabi\lib\gnat\zfp-stm32f4\
+A -mlittle-endian
+A -mfloat-abi=hard
+A -mcpu=cortex-m4
+A -mfpu=fpv4-sp-d16
+A -mthumb
+A -g
+A -g
+P ZX
+
+RN
+RV NO_IMPLEMENTATION_PRAGMAS
+RV SPARK_05
+
+U hershey_fonts.futural%s  hershey_fonts-futural.ads  81bfbec4 NE OO PK
+W hershey_fonts%s	hershey_fonts.adb	hershey_fonts.ali
+
+D hal.ads		20181001204926 2b42c80e hal%s
+D hershey_fonts.ads	20181001204926 f42bbcd7 hershey_fonts%s
+D hershey_fonts-futural.ads  20181001204926 75940213 hershey_fonts.futural%s
+D interfac.ads		20180524194940 5ab55268 interfaces%s
+D system.ads		20180524194940 d6ae8d8f system%s
+X 2 hershey_fonts.ads
+37K9*Hershey_Fonts 95e18 3|75r9 188r5
+39P9*Font_Desc(string) 3|184r11
+X 3 hershey_fonts-futural.ads
+75K23*FuturaL 2|37k9 3|188l19 188e26
+79a4*Desc{string} 184r24
+184p4*Font{2|39P9}
+

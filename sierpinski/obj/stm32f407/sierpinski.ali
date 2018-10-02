@@ -1,0 +1,62 @@
+V "GNAT Lib v2018"
+M P W=b
+A -gnatA
+A --RTS=C:\gnat\2018-arm-elf\arm-eabi\lib\gnat\zfp-stm32f4\
+A -mlittle-endian
+A -mfloat-abi=hard
+A -mcpu=cortex-m4
+A -mfpu=fpv4-sp-d16
+A -mthumb
+A -g
+A -g
+P ZX
+
+RN
+RV NO_IMPLEMENTATION_PRAGMAS
+RV SPARK_05
+
+U sierpinski%b		sierpinski.adb		4249510f NE OO SU
+W hal%s			hal.ads			hal.ali
+W hal.bitmap%s		hal-bitmap.ads		hal-bitmap.ali
+W hal.framebuffer%s	hal-framebuffer.ads	hal-framebuffer.ali
+W interfaces%s		interfac.ads		interfac.ali
+W last_chance_handler%s	last_chance_handler.adb	last_chance_handler.ali
+W stm32%s		stm32.ads		stm32.ali
+W stm32.rng%s		stm32-rng.adb		stm32-rng.ali
+W stm32.rng.polling%s	stm32-rng-polling.adb	stm32-rng-polling.ali
+
+D ada.ads		20180524194940 76789da1 ada%s
+D a-tags.ads		20180524194940 2dde273c ada.tags%s
+D hal.ads		20181001204926 2b42c80e hal%s
+D hal-bitmap.ads	20181001204926 03ebc14f hal.bitmap%s
+D hal-framebuffer.ads	20181001204926 9811b908 hal.framebuffer%s
+D interfac.ads		20180524194940 5ab55268 interfaces%s
+D last_chance_handler.ads  20181001204926 da51f004 last_chance_handler%s
+D sierpinski.adb	20181002220544 5cb9a8bd sierpinski%b
+D stm32.ads		20181001204924 698e2c3b stm32%s
+D stm32-rng.ads		20181001204924 e3005cde stm32.rng%s
+D stm32-rng-polling.ads	20181001204924 2eaceb97 stm32.rng.polling%s
+D system.ads		20180524194940 d6ae8d8f system%s
+D s-stoele.ads		20180524194940 2dc34a04 system.storage_elements%s
+X 3 hal.ads
+34K9*HAL 166e8 8|3w6 3r15 5r6 5r22 6r6 6r27
+X 4 hal-bitmap.ads
+34K13*Bitmap 424e15 8|5w10 5r26
+X 5 hal-framebuffer.ads
+34K13*Framebuffer 127e20 8|6w10 6r31
+X 6 interfac.ads
+38K9*Interfaces 184e15 8|2w6 2r22
+X 7 last_chance_handler.ads
+36K9*Last_Chance_Handler 42e24 8|1w6 1r48
+38U14*Last_Chance_Handler 39i<c,__gnat_last_chance_handler>22
+X 8 sierpinski.adb
+9U11*Sierpinski 9b11 17l5 17t15
+10i4 i{natural} 15m7 15r10
+X 9 stm32.ads
+39K9*STM32 8|7r6 7r29 9|48e10
+X 10 stm32-rng.ads
+48K15*RNG 8|7r12 7r35 10|78e14
+X 11 stm32-rng-polling.ads
+47K19*Polling 8|7w16 7r39 11|59e22
+49U14*Initialize_RNG 8|13s4
+

@@ -1,0 +1,10 @@
+lcd_std_out.adb:32:06: "Ada.Real_Time" is not a predefined library unit
+lcd_std_out.adb:32:06: "Stm32.Device (spec)" depends on "Stm32.Dma (spec)"
+lcd_std_out.adb:32:06: "Stm32.Dma (spec)" depends on "Ada.Real_Time (spec)"
+lcd_std_out.adb:32:06: "Stm32.Board (spec)" depends on "Stm32.Device (spec)"
+lcd_std_out.adb:32:06: "Stm32.Device (spec)" depends on "Stm32.Spi.Dma (spec)"
+lcd_std_out.adb:32:06: "Stm32.Spi.Dma (spec)" depends on "Stm32.Dma.Interrupts (spec)"
+lcd_std_out.adb:32:06: "Stm32.Dma.Interrupts (spec)" depends on "Ada.Interrupts (spec)"
+lcd_std_out.adb:32:06: "Ada.Interrupts.Names" is not a predefined library unit
+lcd_std_out.adb:32:06: "Lcd_Std_Out (body)" depends on "Stm32.Board (spec)"
+lcd_std_out.adb:32:06: "Stm32.Board (spec)" depends on "Ada.Interrupts.Names (spec)"
