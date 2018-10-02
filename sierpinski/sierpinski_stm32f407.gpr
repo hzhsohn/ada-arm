@@ -3,7 +3,6 @@ with "../Ada_Drivers_Library/boards/stm32f407_discovery/stm32f407_discovery_full
 project Sierpinski_STM32F407 extends "../Ada_Drivers_Library/examples/shared/common/common.gpr" is
 
    for Object_Dir use "obj/stm32f407";
-   for Main use ("sierpinski.adb");
    for Source_Dirs use ("src");
    type Lch_Type is
       ("led", "lcd");
@@ -32,6 +31,7 @@ project Sierpinski_STM32F407 extends "../Ada_Drivers_Library/examples/shared/com
                case Loader is
 
                   when "RAM" =>
+                     for Main use ("sierpinski.adb");
                      for Runtime ("ada") use Stm32F407_Discovery_Full'Runtime ("Ada");
 
                   when "ROM" =>
@@ -43,23 +43,28 @@ project Sierpinski_STM32F407 extends "../Ada_Drivers_Library/examples/shared/com
                            case Adl_Build is
 
                               when "Debug" =>
+                                 for Main use ("main.adb");
                                  for Runtime ("ada") use "zfp-stm32f4";
                                  for Target use "arm-eabi";
 
                               when "Production" =>
+                                 for Main use ("sierpinski.adb");
                                  for Runtime ("ada") use Stm32F407_Discovery_Full'Runtime ("Ada");
                            end case;
 
                         when "Enabled" =>
+                           for Main use ("sierpinski.adb");
                            for Runtime ("ada") use Stm32F407_Discovery_Full'Runtime ("Ada");
                      end case;
                end case;
 
             when "ravenscar-full" =>
+               for Main use ("sierpinski.adb");
                for Runtime ("ada") use Stm32F407_Discovery_Full'Runtime ("Ada");
          end case;
 
       when "lcd" =>
+         for Main use ("sierpinski.adb");
          for Runtime ("ada") use Stm32F407_Discovery_Full'Runtime ("Ada");
    end case;
 
@@ -129,7 +134,7 @@ project Sierpinski_STM32F407 extends "../Ada_Drivers_Library/examples/shared/com
                               case Adl_Build is
 
                                  when "Debug" =>
-                                    for Switches ("ada") use ("-g", "-C", "-k");
+                                    for Switches ("ada") use ("-g");
 
                                  when "Production" =>
 

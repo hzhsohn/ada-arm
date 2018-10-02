@@ -14,5 +14,6 @@
 *.pyc
 obj/
 lib/
+sierpinski/obj/
 
 examples/HiFive1/zfp-hifive1/

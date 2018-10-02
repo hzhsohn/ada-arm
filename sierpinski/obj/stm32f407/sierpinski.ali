@@ -27,15 +27,15 @@ W stm32.rng.polling%s	stm32-rng-polling.adb	stm32-rng-polling.ali
 
 D ada.ads		20180524194940 76789da1 ada%s
 D a-tags.ads		20180524194940 2dde273c ada.tags%s
-D hal.ads		20181001204926 2b42c80e hal%s
-D hal-bitmap.ads	20181001204926 03ebc14f hal.bitmap%s
-D hal-framebuffer.ads	20181001204926 9811b908 hal.framebuffer%s
+D hal.ads		20181002221132 2b42c80e hal%s
+D hal-bitmap.ads	20181002221132 03ebc14f hal.bitmap%s
+D hal-framebuffer.ads	20181002221132 9811b908 hal.framebuffer%s
 D interfac.ads		20180524194940 5ab55268 interfaces%s
-D last_chance_handler.ads  20181001204926 da51f004 last_chance_handler%s
-D sierpinski.adb	20181002220544 5cb9a8bd sierpinski%b
-D stm32.ads		20181001204924 698e2c3b stm32%s
-D stm32-rng.ads		20181001204924 e3005cde stm32.rng%s
-D stm32-rng-polling.ads	20181001204924 2eaceb97 stm32.rng.polling%s
+D last_chance_handler.ads  20181002221132 da51f004 last_chance_handler%s
+D sierpinski.adb	20181002224216 5cb9a8bd sierpinski%b
+D stm32.ads		20181002221130 698e2c3b stm32%s
+D stm32-rng.ads		20181002221130 e3005cde stm32.rng%s
+D stm32-rng-polling.ads	20181002221130 2eaceb97 stm32.rng.polling%s
 D system.ads		20180524194940 d6ae8d8f system%s
 D s-stoele.ads		20180524194940 2dc34a04 system.storage_elements%s
 X 3 hal.ads
