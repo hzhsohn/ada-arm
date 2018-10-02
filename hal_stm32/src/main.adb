@@ -11,6 +11,8 @@ procedure main is
 begin
 
    Initialize_RNG;
+
+
    loop
       i:=i+1;
       i:=i mod 5;
