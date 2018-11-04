@@ -1,0 +1,157 @@
+with "../Ada_Drivers_Library/boards/stm32f407_discovery/stm32f407_discovery_full.gpr";
+
+project A extends "../Ada_Drivers_Library/examples/shared/common/common.gpr" is
+
+   type Build_Type is
+      ("Debug", "Production");
+   type Build_Checks_Type is
+      ("Disabled", "Enabled");
+   type Loader_Type is
+      ("RAM", "ROM");
+   type Rts_Type is
+      ("ravenscar-sfp", "ravenscar-full");
+   type Lch_Type is
+      ("led", "lcd");
+   for Main use ("main.adb");
+   for Languages use ("Ada");
+   for Source_Dirs use ("src");
+   for Object_Dir use "obj/" & Stm32F407_Discovery_Full.Build;
+   for Runtime ("ada") use Stm32F407_Discovery_Full'Runtime ("Ada");
+   for Create_Missing_Dirs use "true";
+   Lch : Lch_Type := external ("LCH");
+   Rts_Profile : Rts_Type := external ("RTS_Profile");
+   Loader : Loader_Type := external ("LOADER");
+   Adl_Build_Checks : Build_Checks_Type := external ("ADL_BUILD_CHECKS");
+   Adl_Build : Build_Type := external ("ADL_BUILD");
+
+   package Builder is
+      for Global_Configuration_Pragmas use "gnat.adc";
+
+      case Lch is
+
+         when "led" =>
+
+            case Rts_Profile is
+
+               when "ravenscar-sfp" =>
+
+                  case Loader is
+
+                     when "RAM" =>
+
+                     when "ROM" =>
+
+                        case Adl_Build_Checks is
+
+                           when "Disabled" =>
+
+                              case Adl_Build is
+
+                                 when "Debug" =>
+                                    for Switches ("ada") use ("-g");
+
+                                 when "Production" =>
+
+                              end case;
+
+                           when "Enabled" =>
+
+                        end case;
+                  end case;
+
+               when "ravenscar-full" =>
+
+            end case;
+
+         when "lcd" =>
+
+      end case;
+   end Builder;
+
+   package Compiler renames Stm32F407_Discovery_Full.Compiler;
+
+   case Lch is
+
+      when "led" =>
+
+         case Rts_Profile is
+
+            when "ravenscar-sfp" =>
+
+               case Loader is
+
+                  when "RAM" =>
+
+                  when "ROM" =>
+
+                     case Adl_Build_Checks is
+
+                        when "Disabled" =>
+
+                           case Adl_Build is
+
+                              when "Debug" =>
+                                 for Target use "arm-eabi";
+
+                              when "Production" =>
+
+                           end case;
+
+                        when "Enabled" =>
+
+                     end case;
+               end case;
+
+            when "ravenscar-full" =>
+
+         end case;
+
+      when "lcd" =>
+
+   end case;
+
+   package Linker is
+
+      case Lch is
+
+         when "led" =>
+
+            case Rts_Profile is
+
+               when "ravenscar-sfp" =>
+
+                  case Loader is
+
+                     when "RAM" =>
+
+                     when "ROM" =>
+
+                        case Adl_Build_Checks is
+
+                           when "Disabled" =>
+
+                              case Adl_Build is
+
+                                 when "Debug" =>
+                                    for Default_Switches ("ada") use ("-Wl,--gc-sections", "-Wl,--print-memory-usage", "-g");
+
+                                 when "Production" =>
+
+                              end case;
+
+                           when "Enabled" =>
+
+                        end case;
+                  end case;
+
+               when "ravenscar-full" =>
+
+            end case;
+
+         when "lcd" =>
+
+      end case;
+   end Linker;
+
+end A;
+
