@@ -1,33 +1,3 @@
-------------------------------------------------------------------------------
---                                                                          --
---                 Copyright (C) 2015-2016, AdaCore                         --
---                                                                          --
---  Redistribution and use in source and binary forms, with or without      --
---  modification, are permitted provided that the following conditions are  --
---  met:                                                                    --
---     1. Redistributions of source code must retain the above copyright    --
---        notice, this list of conditions and the following disclaimer.     --
---     2. Redistributions in binary form must reproduce the above copyright --
---        notice, this list of conditions and the following disclaimer in   --
---        the documentation and/or other materials provided with the        --
---        distribution.                                                     --
---     3. Neither the name of the copyright holder nor the names of its     --
---        contributors may be used to endorse or promote products derived   --
---        from this software without specific prior written permission.     --
---                                                                          --
---   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS    --
---   "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT      --
---   LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR  --
---   A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT   --
---   HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, --
---   SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT       --
---   LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,  --
---   DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY  --
---   THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT    --
---   (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE  --
---   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.   --
---                                                                          --
-------------------------------------------------------------------------------
 
 package body Serial_Port is
 
@@ -110,12 +80,8 @@ package body Serial_Port is
 
       procedure Handle_Transmission is
       begin
-         --  if Word_Lenth = 9 then
-         --    -- handle the extra byte required for the 9th bit
-         --  else  -- 8 data bits so no extra byte involved
          Transmit (Device.all, Character'Pos (Outgoing_Msg.Content (Next_Out)));
          Next_Out := Next_Out + 1;
-         --  end if;
          Awaiting_Transfer := Awaiting_Transfer - 1;
          if Awaiting_Transfer = 0 then
             Disable_Interrupts (Device.all, Source => Transmit_Data_Register_Empty);
@@ -130,19 +96,19 @@ package body Serial_Port is
       procedure Handle_Reception is
          Received_Char : constant Character := Character'Val (Current_Input (Device.all));
       begin
-         Incoming_Msg.Content (Next_In) := Received_Char;
-         if Received_Char = Incoming_Msg.Terminator or
-            Next_In = Incoming_Msg.Physical_Size
-         then --  reception complete
-            Incoming_Msg.Logical_Size := Next_In;
-            loop
-               exit when not Status (Device.all, Read_Data_Register_Not_Empty);
-            end loop;
-            Disable_Interrupts (Device.all, Source => Received_Data_Not_Empty);
-            Set_True (Incoming_Msg.Reception_Complete);
-         else
-            Next_In := Next_In + 1;
-         end if;
+            Incoming_Msg.Content (Next_In) := Received_Char;
+            if Received_Char = Incoming_Msg.Terminator or
+              Next_In = Incoming_Msg.Physical_Size -20
+            then --  reception complete
+               Incoming_Msg.Logical_Size := Next_In;
+               loop
+                  exit when not Status (Device.all, Read_Data_Register_Not_Empty);
+               end loop;
+               Disable_Interrupts (Device.all, Source => Received_Data_Not_Empty);
+               Set_True (Incoming_Msg.Reception_Complete);
+            else
+               Next_In := Next_In + 1;
+            end if;
       end Handle_Reception;
 
       -----------------

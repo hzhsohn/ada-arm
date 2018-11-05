@@ -14,9 +14,8 @@ procedure main is
    -- define
    ---------------------
 
-   isRecvOK: Boolean :=False;
-   uartRecvBuf : aliased Message (Physical_Size => 1024);  -- arbitrary size
-   uartSendBuf : aliased Message (Physical_Size => 1024);  -- arbitrary size
+   uartRecvBuf : aliased Message (Physical_Size => 512);  -- arbitrary size
+   uartSendBuf : aliased Message (Physical_Size => 512);  -- arbitrary size
 
    -- function
 
@@ -47,14 +46,11 @@ begin
       Peripherals.COM.Start_Receiving (uartRecvBuf'Unchecked_Access);
       -- block waiting
       Suspend_Until_True (uartRecvBuf.Reception_Complete);
-      -- non blocking get. recv complete status
-      isRecvOK:=Current_State(uartRecvBuf.Reception_Complete);
-      if isRecvOK then
-         -- reback uart data
-         Set (uartSendBuf, To => "Received : " & As_String (uartRecvBuf));
-         Peripherals.COM.Start_Sending (uartSendBuf'Unchecked_Access);
-         Suspend_Until_True (uartSendBuf.Transmission_Complete);
-      end if;
+
+      -- reback uart data
+      Set (uartSendBuf, To => "Received : " & As_String (uartRecvBuf));
+      Peripherals.COM.Start_Sending (uartSendBuf'Unchecked_Access);
+      Suspend_Until_True (uartSendBuf.Transmission_Complete);
 
    end loop;
 end main;
