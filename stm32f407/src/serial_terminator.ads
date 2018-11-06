@@ -35,7 +35,7 @@ with STM32.USARTs;                  use STM32.USARTs;
 
 with HAL; use HAL;
 
-package Serial_Port is
+package Serial_Terminator is
 
    type Message (Physical_Size : Positive) is
       record
@@ -96,4 +96,4 @@ package Serial_Port is
 
    end Controller;
 
-end Serial_Port;
+end Serial_Terminator;

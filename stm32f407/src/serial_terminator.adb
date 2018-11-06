@@ -1,5 +1,5 @@
 
-package body Serial_Port is
+package body Serial_Terminator is
 
    ---------------
    -- As_String --
@@ -96,9 +96,8 @@ package body Serial_Port is
       procedure Handle_Reception is
          Received_Char : constant Character := Character'Val (Current_Input (Device.all));
       begin
-            Incoming_Msg.Content (Next_In) := Received_Char;
             if Received_Char = Incoming_Msg.Terminator or
-              Next_In = Incoming_Msg.Physical_Size -20
+              Next_In = Incoming_Msg.Physical_Size
             then --  reception complete
                Incoming_Msg.Logical_Size := Next_In;
                loop
@@ -106,7 +105,9 @@ package body Serial_Port is
                end loop;
                Disable_Interrupts (Device.all, Source => Received_Data_Not_Empty);
                Set_True (Incoming_Msg.Reception_Complete);
-            else
+         else
+
+               Incoming_Msg.Content (Next_In) := Received_Char;
                Next_In := Next_In + 1;
             end if;
       end Handle_Reception;
@@ -168,4 +169,4 @@ package body Serial_Port is
    end Controller;
 
 
-end Serial_Port;
+end Serial_Terminator;
