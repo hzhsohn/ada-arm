@@ -51,9 +51,9 @@ package Peripherals is
    -- hex data uart initizal config
    tuart2 : USART renames USART_2;
    tuart2_Interrupt_Id : constant Interrupt_ID := USART2_Interrupt;
-   tuart2_AF : constant STM32.GPIO_Alternate_Function := GPIO_AF_USART1_7;
-   tuart2_TX_Pin : constant GPIO_Point := PA9;
-   tuart2_RX_Pin : constant GPIO_Point := PA10;
+   tuart2_AF : constant STM32.GPIO_Alternate_Function := GPIO_AF_USART2_7;
+   tuart2_TX_Pin : constant GPIO_Point := PA2;
+   tuart2_RX_Pin : constant GPIO_Point := PA3;
    COM2 : Serial_Hex.Controller (tuart2'Access, tuart2_Interrupt_Id);
 
    ---------------------------------------------------------------

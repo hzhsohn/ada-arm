@@ -5,10 +5,10 @@ package body Serial_Hex is
    -- Set --
    ---------
 
-   procedure Set (This : in out HexData;  To : BuffCache) is
+   procedure Set (This : in out HexData;  To : UInt8_Array) is
    begin
-      This.buff := To;
       This.size := To'Length;
+      This.buff(0..To'Length) := To;
    end Set;
 
    ----------------
@@ -75,6 +75,7 @@ package body Serial_Hex is
          Next_Out := Next_Out + 1;
          if Next_Out = Outgoing_Msg.size then
             Disable_Interrupts (Device.all, Source => Transmit_Data_Register_Empty);
+            Set_True (Outgoing_Msg.Transmission_Complete);
          end if;
       end Handle_Transmission;
 
@@ -91,6 +92,7 @@ package body Serial_Hex is
             loop
                exit when not Status (Device.all, Read_Data_Register_Not_Empty);
             end loop;
+            Incoming_Msg.isRecvDone:=True;
             Disable_Interrupts (Device.all, Source => Received_Data_Not_Empty);
          else
             Next_In := Next_In + 1;
@@ -130,12 +132,14 @@ package body Serial_Hex is
 
       procedure Start_Sending (Msg : not null access HexData) is
       begin
+
          Outgoing_Msg := Msg;
          Next_Out := 0;
 
          Enable_Interrupts (Device.all, Source => Parity_Error);
          Enable_Interrupts (Device.all, Source => Error);
          Enable_Interrupts (Device.all, Source => Transmit_Data_Register_Empty);
+         Suspend_Until_True (Msg.Transmission_Complete);
       end Start_Sending;
 
       ---------------------
@@ -146,6 +150,7 @@ package body Serial_Hex is
       begin
          Incoming_Msg := Msg;
          Next_In := 0;
+         Incoming_Msg.isRecvDone:=False;
 
          Enable_Interrupts (Device.all, Source => Parity_Error);
          Enable_Interrupts (Device.all, Source => Error);

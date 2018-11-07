@@ -44,7 +44,7 @@ package body Peripherals is
           AF_Output_Type => Push_Pull,
           AF_Speed       => Speed_50MHz));
 
-      Disable (tuart1);
+      Disable (tuart2);
       Set_Baud_Rate    (tuart2, 115_200);
       Set_Mode         (tuart2, Tx_Rx_Mode);
       Set_Stop_Bits    (tuart2, Stopbits_1);
@@ -52,7 +52,7 @@ package body Peripherals is
       Set_Parity       (tuart2, No_Parity);
       Set_Flow_Control (tuart2, No_Flow_Control);
 
-      Enable (tuart1);
+      Enable (tuart2);
 
 
    end Initialize_STMicro_UART;

@@ -1,20 +1,22 @@
 
 with Ada.Interrupts;                use Ada.Interrupts;
 with STM32.USARTs;                  use STM32.USARTs;
+with Ada.Synchronous_Task_Control;  use Ada.Synchronous_Task_Control;
 
 with HAL; use HAL;
 
 package Serial_Hex is
 
-   type BuffCache is array(0..1024) of UInt8;
-
-   type HexData is
+   type HexData(Physical_Size : Positive) is
       record
-         buff          : BuffCache;
+         buff          : UInt8_Array(0..Physical_Size);
          size          : Natural := 0;
+         isRecvDone    : Boolean:=False;            -- non-block recevice
+         Transmission_Complete : Suspension_Object; -- block sending
       end record;
 
-   procedure Set (This : in out HexData;  To : BuffCache);
+   procedure Set (This : in out HexData;  To :UInt8_Array)with
+     Pre => To'Length <= This.Physical_Size;
 
 
    type Error_Conditions is new UInt8;
