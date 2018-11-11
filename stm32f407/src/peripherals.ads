@@ -29,7 +29,6 @@
 --                                                                          --
 ------------------------------------------------------------------------------
 
-with Serial_Terminator;
 with Serial_Hex;
 with STM32.Device;         use STM32.Device;
 with STM32.GPIO;           use STM32.GPIO;
@@ -46,7 +45,7 @@ package Peripherals is
    tuart1_AF : constant STM32.GPIO_Alternate_Function := GPIO_AF_USART1_7;
    tuart1_TX_Pin : constant GPIO_Point := PB7;
    tuart1_RX_Pin : constant GPIO_Point := PB6;
-   COM : Serial_Terminator.Controller (tuart1'Access, tuart1_Interrupt_Id);
+   COM1 : Serial_Hex.Controller (tuart1'Access, tuart1_Interrupt_Id);
 
    -- hex data uart initizal config
    tuart2 : USART renames USART_2;

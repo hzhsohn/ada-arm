@@ -119,25 +119,39 @@ package body Serial_Hex is
       -------------------
       -- init --
       -------------------
-      procedure Init is
+      procedure Init(recvBuf : not null access HexData) is
       begin
+         Incoming_Msg:=recvBuf;
          Reset_Receive;
+
+         Enable_Interrupts (Device.all, Source => Parity_Error);
+         Enable_Interrupts (Device.all, Source => Error);
+         Enable_Interrupts (Device.all, Source => Received_Data_Not_Empty);
+         Disable_Interrupts (Device.all, Source => Transmit_Data_Register_Empty);
+
       end;
 
       -------------------
       -- Start_Sending --
       -------------------
 
-      procedure Start_Sending (buf: UInt8_Array) is
+      procedure Start_Sending (This : not null access HexData;
+                               buf: UInt8_Array) is
+
       begin
 
-         Next_Out := buf'Length;
-         Outgoing_Msg.buff:= buf;
+         Outgoing_Msg:=This;
+         Next_Out := Outgoing_Msg.buff'First;
+
+         Outgoing_Msg.size :=buf'Length;
+         for i in 0..Outgoing_Msg.size-1 loop
+            Outgoing_Msg.buff(i):= buf(i);
+         end loop;
 
          Enable_Interrupts (Device.all, Source => Parity_Error);
          Enable_Interrupts (Device.all, Source => Error);
          Enable_Interrupts (Device.all, Source => Transmit_Data_Register_Empty);
-         Suspend_Until_True (Outgoing_Msg.Transmission_Complete);
+
       end Start_Sending;
 
       ---------------------
@@ -146,11 +160,8 @@ package body Serial_Hex is
 
       procedure Reset_Receive  is
       begin
-         Next_In := 0;
+         Next_In := Incoming_Msg.buff'First;
          Incoming_Msg.isRecvDone:=False;
-
-         Enable_Interrupts (Device.all, Source => Parity_Error);
-         Enable_Interrupts (Device.all, Source => Error);
          Enable_Interrupts (Device.all, Source => Received_Data_Not_Empty);
       end Reset_Receive;
 
@@ -159,6 +170,7 @@ package body Serial_Hex is
       begin
          return Incoming_Msg.isRecvDone;
       end isRecvDone;
+
 
    end Controller;
 

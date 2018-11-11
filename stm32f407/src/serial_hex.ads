@@ -16,23 +16,25 @@ package Serial_Hex is
    Overrun_Error_Detected : constant Error_Conditions := 2#0000_1000#;
    DMA_Error_Detected     : constant Error_Conditions := 2#0001_0000#;
 
+
    --------------------
    type HexData(Physical_Size : Positive) is
       record
          buff          : UInt8_Array(0..Physical_Size);
          size          : Natural := 0;
          isRecvDone    : Boolean:=False;            -- non-block recevice
-         Transmission_Complete : Suspension_Object; -- block sending
+         Transmission_Complete : Suspension_Object;--send blocking
       end record;
 
    protected type Controller (Device : access USART;
                               IRQ : Interrupt_ID) is
 
-
-      procedure Init;
-      procedure Start_Sending (buf: UInt8_Array);
+      procedure Init(recvBuf : not null access HexData);
+      procedure Start_Sending (This : not null access HexData;
+                               buf: UInt8_Array);
       procedure Reset_Receive ;
       function isRecvDone return Boolean;
+
 
    private
 
@@ -47,10 +49,10 @@ package Serial_Hex is
 
       --------------------
       Next_Out          : Natural;
-      Outgoing_Msg      : HexData(512);
+      Outgoing_Msg      : access HexData;
 
       Next_In           : Natural;
-      Incoming_Msg      : HexData(512);
+      Incoming_Msg      : access HexData;
 
 
    end Controller;
