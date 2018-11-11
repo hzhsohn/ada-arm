@@ -6,6 +6,7 @@ with Ada.Synchronous_Task_Control; use Ada.Synchronous_Task_Control;
 with Peripherals;                  use Peripherals;
 with Serial_Hex; use Serial_Hex;
 with Last_Chance_Handler;  pragma Unreferenced (Last_Chance_Handler);
+with HAL; use HAL;
 
 
 procedure main is
@@ -38,6 +39,8 @@ procedure main is
    end Initialize;
 
 
+   pstr: UInt8_Array(0..100);
+
 begin
    Initialize;
 
@@ -45,12 +48,16 @@ begin
       ---------------------------
       -- UART1
       ---------------------------
-     if Peripherals.COM1.isRecvDone then
+      if Peripherals.COM1.isRecvDone then
          ---------------------------------
          -- reback uart
-         Peripherals.COM1.Start_Sending(This => uartSendBuf'Unchecked_Access,
-                                        buf => (16#0A#,16#0B#,16#0C#,16#0D#,16#99#));
-         Suspend_Until_True (uartSendBuf.Transmission_Complete);
+
+         pstr:=Serial_Hex.trStringToUint8Array("abcdefg");
+
+            Peripherals.COM1.Start_Sending(This => uartSendBuf'Unrestricted_Access,
+                                           buf => pstr);
+            Suspend_Until_True (uartSendBuf.Transmission_Complete);
+
          ---------------------------------
          -- reset recevice
          Peripherals.COM1.Reset_Receive;

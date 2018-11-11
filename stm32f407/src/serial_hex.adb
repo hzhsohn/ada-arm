@@ -1,6 +1,17 @@
 
 package body Serial_Hex is
 
+   function trStringToUint8Array(str:String) return UInt8_Array is
+      UA:UInt8_Array(0..str'Length);
+   begin
+   for i in 0..str'Length loop
+      UA(i):=Character'Pos (str(i));
+   end loop;
+   return UA;
+   end trStringToUint8Array;
+
+
+
    ----------------
    -- Controller --
    ----------------

@@ -2,7 +2,6 @@
 with Ada.Interrupts;                use Ada.Interrupts;
 with STM32.USARTs;                  use STM32.USARTs;
 with Ada.Synchronous_Task_Control;  use Ada.Synchronous_Task_Control;
-
 with HAL; use HAL;
 
 package Serial_Hex is
@@ -17,7 +16,7 @@ package Serial_Hex is
    DMA_Error_Detected     : constant Error_Conditions := 2#0001_0000#;
 
 
-   --------------------
+   -----------------------
    type HexData(Physical_Size : Positive) is
       record
          buff          : UInt8_Array(0..Physical_Size);
@@ -26,6 +25,11 @@ package Serial_Hex is
          Transmission_Complete : Suspension_Object;--send blocking
       end record;
 
+
+   ------------------------
+   function trStringToUint8Array(str:String) return UInt8_Array;
+
+   ------------------------
    protected type Controller (Device : access USART;
                               IRQ : Interrupt_ID) is
 
