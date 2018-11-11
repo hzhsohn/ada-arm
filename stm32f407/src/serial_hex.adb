@@ -1,15 +1,14 @@
 
 package body Serial_Hex is
 
-   function trStringToUint8Array(str:String) return UInt8_Array is
-      UA:UInt8_Array(0..str'Length);
+   procedure trStringToUint8Array(sendbuf:access HexData;
+                                  str:String) is
    begin
-   for i in 0..str'Length loop
-      UA(i):=Character'Pos (str(i));
-   end loop;
-   return UA;
+      sendbuf.size:=str'Length;
+      for i in 0..sendbuf.size-1 loop
+         sendbuf.buff(i):=Character'Pos(str(i+1));
+      end loop;
    end trStringToUint8Array;
-
 
 
    ----------------
@@ -145,6 +144,19 @@ package body Serial_Hex is
       -------------------
       -- Start_Sending --
       -------------------
+      procedure Start_Sending (This : not null access HexData;
+                              str : String) is
+      begin
+         Outgoing_Msg:=This;
+         Next_Out := Outgoing_Msg.buff'First;
+
+         trStringToUint8Array(This,str);
+
+         Enable_Interrupts (Device.all, Source => Parity_Error);
+         Enable_Interrupts (Device.all, Source => Error);
+         Enable_Interrupts (Device.all, Source => Transmit_Data_Register_Empty);
+
+      end Start_Sending;
 
       procedure Start_Sending (This : not null access HexData;
                                buf: UInt8_Array) is

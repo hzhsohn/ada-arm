@@ -39,7 +39,6 @@ procedure main is
    end Initialize;
 
 
-   pstr: UInt8_Array(0..100);
 
 begin
    Initialize;
@@ -51,12 +50,8 @@ begin
       if Peripherals.COM1.isRecvDone then
          ---------------------------------
          -- reback uart
-
-         pstr:=Serial_Hex.trStringToUint8Array("abcdefg");
-
-            Peripherals.COM1.Start_Sending(This => uartSendBuf'Unrestricted_Access,
-                                           buf => pstr);
-            Suspend_Until_True (uartSendBuf.Transmission_Complete);
+         Peripherals.COM1.Start_Sending(This => uartSendBuf'Unchecked_Access,str => "abcdefg");
+         Suspend_Until_True (uartSendBuf.Transmission_Complete);
 
          ---------------------------------
          -- reset recevice

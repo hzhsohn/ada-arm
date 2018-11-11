@@ -27,13 +27,16 @@ package Serial_Hex is
 
 
    ------------------------
-   function trStringToUint8Array(str:String) return UInt8_Array;
+   procedure trStringToUint8Array(sendbuf:access HexData;
+                                 str:String);
 
    ------------------------
    protected type Controller (Device : access USART;
                               IRQ : Interrupt_ID) is
 
       procedure Init(recvBuf : not null access HexData);
+      procedure Start_Sending (This : not null access HexData;
+                              str: String);
       procedure Start_Sending (This : not null access HexData;
                                buf: UInt8_Array);
       procedure Reset_Receive ;
