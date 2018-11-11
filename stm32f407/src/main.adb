@@ -18,8 +18,8 @@ procedure main is
    uartRecvBuf : aliased Message (Physical_Size => 512);
    uartSendBuf : aliased Message (Physical_Size => 512);
 
-   uart2RecvBuf : aliased HexData (Physical_Size => 512);
-   uart2SendBuf : aliased HexData (Physical_Size => 512);
+  -- uart2RecvBuf : aliased HexData (Physical_Size => 512);
+  -- uart2SendBuf : aliased HexData (Physical_Size => 512);
 
 
    -- function
@@ -47,7 +47,7 @@ begin
    Peripherals.COM.Start_Sending (uartSendBuf'Unchecked_Access);
    Suspend_Until_True (uartSendBuf.Transmission_Complete);
 --------------
-   Peripherals.COM2.Start_Receiving (uart2RecvBuf'Unchecked_Access);
+   Peripherals.COM2.Init;
    -------------------------
    loop
       --        Peripherals.COM.Start_Receiving (uartRecvBuf'Unchecked_Access);
@@ -59,10 +59,11 @@ begin
       --        Peripherals.COM.Start_Sending (uartSendBuf'Unchecked_Access);
       --        Suspend_Until_True (uartSendBuf.Transmission_Complete);
 
-      if (uart2RecvBuf.isRecvDone) then
-         Serial_Hex.Set (uart2SendBuf,To => (16#01#,16#02#,16#03#));
-         Peripherals.COM2.Start_Sending (uart2SendBuf'Unchecked_Access);
-      end if;
+     if Peripherals.COM2.isRecvDone then
+        Peripherals.COM2.Start_Sending(buf => (16#0A#,16#0B#,16#0C#));
+        Peripherals.COM2.Reset_Receive;
+     end if;
+     null;
    end loop;
 end main;
 

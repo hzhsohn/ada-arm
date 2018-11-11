@@ -1,16 +1,6 @@
 
 package body Serial_Hex is
 
-   ---------
-   -- Set --
-   ---------
-
-   procedure Set (This : in out HexData;  To : UInt8_Array) is
-   begin
-      This.size := To'Length;
-      This.buff(0..To'Length) := To;
-   end Set;
-
    ----------------
    -- Controller --
    ----------------
@@ -127,37 +117,49 @@ package body Serial_Hex is
       end IRQ_Handler;
 
       -------------------
+      -- init --
+      -------------------
+      procedure Init is
+      begin
+         Reset_Receive;
+      end;
+
+      -------------------
       -- Start_Sending --
       -------------------
 
-      procedure Start_Sending (Msg : not null access HexData) is
+      procedure Start_Sending (buf: UInt8_Array) is
       begin
 
-         Outgoing_Msg := Msg;
-         Next_Out := 0;
+         Next_Out := buf'Length;
+         Outgoing_Msg.buff:= buf;
 
          Enable_Interrupts (Device.all, Source => Parity_Error);
          Enable_Interrupts (Device.all, Source => Error);
          Enable_Interrupts (Device.all, Source => Transmit_Data_Register_Empty);
-         Suspend_Until_True (Msg.Transmission_Complete);
+         Suspend_Until_True (Outgoing_Msg.Transmission_Complete);
       end Start_Sending;
 
       ---------------------
       -- Start_Receiving --
       ---------------------
 
-      procedure Start_Receiving (Msg : not null access HexData) is
+      procedure Reset_Receive  is
       begin
-         Incoming_Msg := Msg;
          Next_In := 0;
          Incoming_Msg.isRecvDone:=False;
 
          Enable_Interrupts (Device.all, Source => Parity_Error);
          Enable_Interrupts (Device.all, Source => Error);
          Enable_Interrupts (Device.all, Source => Received_Data_Not_Empty);
-      end Start_Receiving;
+      end Reset_Receive;
+
+      --
+      function isRecvDone return Boolean is
+      begin
+         return Incoming_Msg.isRecvDone;
+      end isRecvDone;
 
    end Controller;
-
 
 end Serial_Hex;
