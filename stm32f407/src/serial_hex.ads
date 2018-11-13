@@ -2,7 +2,8 @@
 with Ada.Interrupts;                use Ada.Interrupts;
 with STM32.USARTs;                  use STM32.USARTs;
 with Ada.Synchronous_Task_Control;  use Ada.Synchronous_Task_Control;
-with HAL; use HAL;
+with HAL;                           use HAL;
+
 
 package Serial_Hex is
 

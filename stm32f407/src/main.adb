@@ -7,6 +7,7 @@ with Peripherals;                  use Peripherals;
 with Serial_Hex; use Serial_Hex;
 with Last_Chance_Handler;  pragma Unreferenced (Last_Chance_Handler);
 with HAL; use HAL;
+with Window_WWDG; use Window_WWDG;
 
 
 procedure main is
@@ -36,6 +37,13 @@ procedure main is
       --uart recv init
       Peripherals.COM1.Init(uartRecvBuf'Unchecked_Access);
       Peripherals.COM2.Init(uart2RecvBuf'Unchecked_Access);
+
+      ----------------
+      --watch dog
+      --Window_WWDG.Init_Watchdog;
+
+
+
    end Initialize;
 
 
@@ -44,6 +52,14 @@ begin
    Initialize;
 
    loop
+
+
+      ---------------------------
+      --wei dog
+
+      --Window_WWDG.Keep_Watchdog;
+
+
       ---------------------------
       -- UART1
       ---------------------------
