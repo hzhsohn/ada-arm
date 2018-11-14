@@ -1,5 +1,3 @@
-
-
 package body Serial_Hex is
 
    procedure trStringToUint8Array(sendbuf:access HexData;

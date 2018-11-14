@@ -127,14 +127,9 @@ package body Window_WWDG is
    procedure Keep_Watchdog is
    begin
       --test delay time.
-      -- delay until Clock + Application_Work_Interval;
+      delay until Clock + Application_Work_Interval;
       Refresh_Watchdog_Counter (Initial_Count);
    end Keep_Watchdog;
 
-
-   procedure Test_Delay is
-   begin
-      delay until Clock + Application_Work_Interval;
-   end Test_Delay;
 
 end Window_WWDG;

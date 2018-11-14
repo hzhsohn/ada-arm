@@ -1,14 +1,15 @@
+
+
+with ADC_VRef_Polling;
+
+
+
 package body Peripherals is
 
-   -----------------------------
-   -- Initialize_STMicro_UART --
-   -----------------------------
-
-   procedure Initialize_STMicro_UART is
+   -------------------------------------
+   -- uart1 base setting
+   procedure Initialize_COM1(recvBuf : not null access HexData) is
    begin
-
-      -------------------------------------
-      -- uart1 base setting
       Enable_Clock (tuart1);
       Enable_Clock (tuart1_RX_Pin & tuart1_TX_Pin);
 
@@ -30,9 +31,15 @@ package body Peripherals is
 
       Enable (tuart1);
 
+      ---------------------
+      COM1.Init(recvBuf);
+   end;
 
-      -------------------------------------
-      -- uart2 base setting
+   -------------------------------------
+   -- uart2 base setting
+   procedure Initialize_COM2(recvBuf : not null access HexData) is
+   begin
+
       Enable_Clock (tuart2);
       Enable_Clock (tuart2_RX_Pin & tuart2_TX_Pin);
 
@@ -54,7 +61,22 @@ package body Peripherals is
 
       Enable (tuart2);
 
+      --------------------
+      COM2.Init(recvBuf);
+   end;
 
-   end Initialize_STMicro_UART;
+
+   -------------------------------------
+   -- refance volt
+   procedure Initialize_ADC_VRef is
+   begin
+      ADC_VRef_Polling.init;
+   end;
+
+
+   function readVRef return UInt32 is
+   begin
+      return ADC_VRef_Polling.read;
+   end readVRef;
 
 end Peripherals;

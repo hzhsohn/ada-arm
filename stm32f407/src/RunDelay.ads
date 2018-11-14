@@ -4,9 +4,8 @@ with HAL;           use HAL;
 with STM32.Device;  use STM32.Device;
 
 
-package Window_WWDG is
+package RunDelay is
 
-   procedure Init_Watchdog;
-   procedure Keep_Watchdog with Inline;
+    procedure wait with Inline;
 
-end Window_WWDG;
+end RunDelay;

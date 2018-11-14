@@ -22,10 +22,8 @@ procedure main is
    uart2RecvBuf : aliased HexData (Physical_Size => 512);
    uart2SendBuf : aliased HexData (Physical_Size => 512);
 
-
-   -- function
-
-   procedure Initialize;
+   -----------------------
+   vref : UInt32:=0;
 
    ----------------
    -- Initialize --
@@ -33,16 +31,16 @@ procedure main is
 
    procedure Initialize is
    begin
-      Peripherals.Initialize_STMicro_UART;
       --uart recv init
-      Peripherals.COM1.Init(uartRecvBuf'Unchecked_Access);
-      Peripherals.COM2.Init(uart2RecvBuf'Unchecked_Access);
+      Peripherals.Initialize_COM1(uartRecvBuf'Unchecked_Access);
+      Peripherals.Initialize_COM2(uart2RecvBuf'Unchecked_Access);
+
+      --
+      Peripherals.Initialize_ADC_VRef;
 
       ----------------
       --watch dog
       --Window_WWDG.Init_Watchdog;
-
-
 
    end Initialize;
 
@@ -53,12 +51,14 @@ begin
 
    loop
 
-
       ---------------------------
       --wei dog
+      Window_WWDG.Keep_Watchdog;
 
-      --Window_WWDG.Keep_Watchdog;
-
+      ---------------------------
+      -- read refance volt
+      ---------------------------
+      vref:=Peripherals.readVRef;
 
       ---------------------------
       -- UART1
