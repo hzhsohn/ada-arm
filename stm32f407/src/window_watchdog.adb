@@ -2,7 +2,7 @@
 with STM32.WWDG;    use STM32.WWDG;
 with Ada.Real_Time; use Ada.Real_Time;
 
-package body Window_WWDG is
+package body Window_WatchDog is
 
    ----------------------------------------------------------------------------
    --  For the following, see Figure 215 in RM0090, illustrating the watchdog
@@ -103,7 +103,7 @@ package body Window_WWDG is
 
 
    -------------------------------
-   procedure Init_Watchdog is
+   procedure Init_WWDG is
    begin
 
       if WWDG_Reset_Indicated then
@@ -119,17 +119,17 @@ package body Window_WWDG is
       Set_Watchdog_Window (Window_Start_Count);
       Activate_Watchdog (Initial_Count);
 
-   end Init_Watchdog;
+   end Init_WWDG;
 
 
 
    --------------------------------
-   procedure Keep_Watchdog is
+   procedure Keep_WWDG is
    begin
       --test delay time.
       delay until Clock + Application_Work_Interval;
       Refresh_Watchdog_Counter (Initial_Count);
-   end Keep_Watchdog;
+   end Keep_WWDG;
 
 
-end Window_WWDG;
+end Window_WatchDog;

@@ -8,7 +8,7 @@ package body ADC_VRef_Polling is
    Successful : Boolean;
    Timed_Out  : exception;
 
-   procedure init is
+   procedure Init_VREF is
    begin
       Enable_Clock (ADC_1);
 
@@ -33,9 +33,9 @@ package body ADC_VRef_Polling is
          Conversions => (1 => (Channel => VRef_Channel, Sample_Time => Sample_144_Cycles)));
 
       Enable (ADC_1);
-   end init;
+   end Init_VREF;
 
-   function  read return UInt32 is
+   function  Read_VREF return UInt32 is
       VRefInt : UInt32;
    begin
 
@@ -51,6 +51,6 @@ package body ADC_VRef_Polling is
       VRefInt := UInt32 ((Float (Raw) / 4096.0) * Float (ADC_Supply_Voltage));
       return VRefInt;
 
-   end read;
+   end Read_VREF;
 
 end ADC_VRef_Polling;

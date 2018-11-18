@@ -6,7 +6,7 @@ with Ada.Interrupts.Names; use Ada.Interrupts.Names;
 with Serial_Hex;           use Serial_Hex;
 with HAL; use HAL;
 
-package Peripherals is
+package UART_Peripherals is
 
    ---------------------------------------------------------------
    -- terminator uart initizal config
@@ -25,19 +25,10 @@ package Peripherals is
    tuart2_RX_Pin : constant GPIO_Point := PA3;
    COM2 : Serial_Hex.Controller (tuart2'Access, tuart2_Interrupt_Id);
 
-   ---------------------------------------------------------------
-   -- pwm config
-
-   ---------------------------------------------------------------
-   -- adc config
-   function readVRef return UInt32;
-
-
    ------------------------------
    -- header function define
    procedure Initialize_COM1(recvBuf : not null access HexData);
    procedure Initialize_COM2(recvBuf : not null access HexData);
-   procedure Initialize_ADC_VRef;
 
 
-end Peripherals;
+end UART_Peripherals;

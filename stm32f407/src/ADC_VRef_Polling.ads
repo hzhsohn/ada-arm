@@ -6,7 +6,7 @@ with STM32.GPIO;   use STM32.GPIO;
 
 package ADC_VRef_Polling is
 
-   procedure init;
-   function  read return UInt32;
+   procedure Init_VREF;
+   function  Read_VREF return UInt32;
 
 end ADC_VRef_Polling;

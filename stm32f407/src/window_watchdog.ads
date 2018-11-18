@@ -4,9 +4,9 @@ with HAL;           use HAL;
 with STM32.Device;  use STM32.Device;
 
 
-package Window_WWDG is
+package Window_WatchDog is
 
-   procedure Init_Watchdog;
-   procedure Keep_Watchdog with Inline;
+   procedure Init_WWDG;
+   procedure Keep_WWDG with Inline;
 
-end Window_WWDG;
+end Window_WatchDog;

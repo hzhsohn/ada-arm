@@ -1,10 +1,5 @@
 
-
-with ADC_VRef_Polling;
-
-
-
-package body Peripherals is
+package body UART_Peripherals is
 
    -------------------------------------
    -- uart1 base setting
@@ -66,17 +61,4 @@ package body Peripherals is
    end;
 
 
-   -------------------------------------
-   -- refance volt
-   procedure Initialize_ADC_VRef is
-   begin
-      ADC_VRef_Polling.init;
-   end;
-
-
-   function readVRef return UInt32 is
-   begin
-      return ADC_VRef_Polling.read;
-   end readVRef;
-
-end Peripherals;
+end UART_Peripherals;
