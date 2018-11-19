@@ -9,7 +9,6 @@ with Last_Chance_Handler;  pragma Unreferenced (Last_Chance_Handler);
 with HAL; use HAL;
 --with Window_WatchDog;
 with Independent_WatchDog;
-with ADC_VRef_Polling;
 with UART_Peripherals;
 
 
@@ -45,7 +44,6 @@ procedure main is
 
       --------------------
       -- adc
-      ADC_VRef_Polling.Init_VREF;
 
    end Initialize;
 
@@ -60,11 +58,6 @@ begin
       --wei dog
       --Window_WatchDog.Keep_WWDG;
       Independent_WatchDog.Keep_IWDG;
-
-      ---------------------------
-      -- read refance volt
-      ---------------------------
-      vref:=ADC_VRef_Polling.Read_VREF;
 
       ---------------------------
       -- UART1

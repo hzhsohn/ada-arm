@@ -35,8 +35,7 @@ package body ADC_VRef_Polling is
       Enable (ADC_1);
    end Init_VREF;
 
-   function  Read_VREF return UInt32 is
-      VRefInt : UInt32;
+   function  Read_VREF return Natural is
    begin
 
       Start_Conversion (ADC_1);
@@ -48,8 +47,7 @@ package body ADC_VRef_Polling is
 
       Raw := UInt32 (Conversion_Value (ADC_1));
 
-      VRefInt := UInt32 ((Float (Raw) / 4096.0) * Float (ADC_Supply_Voltage));
-      return VRefInt;
+      return Raw;
 
    end Read_VREF;
 
