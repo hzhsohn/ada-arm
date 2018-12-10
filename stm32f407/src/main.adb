@@ -1,7 +1,7 @@
-
-with STM32;                        use STM32;
-with STM32.GPIO;                   use STM32.GPIO;
-with STM32.Device;                 use STM32.Device;
+--
+--  with STM32;                        use STM32;
+--  with STM32.GPIO;                   use STM32.GPIO;
+--  with STM32.Device;                 use STM32.Device;
 with Ada.Synchronous_Task_Control; use Ada.Synchronous_Task_Control;
 
 with Serial_Hex; use Serial_Hex;

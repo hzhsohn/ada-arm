@@ -44,44 +44,36 @@ package body ADC_Temperature_Polling is
    Successful : Boolean;
    Timed_Out  : exception;
 
-   procedure Print (X, Y : Natural; Value : UInt32; Suffix : String := "");
-
-   -----------
-   -- Print --
-   -----------
-
-   procedure Print (X, Y : Natural; Value : UInt32; Suffix : String := "") is
-      Value_Image : constant String := Value'Img;
+   procedure Init_ADC_Temperature is
    begin
-      LCD_Std_Out.Put (X, Y, Value_Image (2 .. Value_Image'Last) & Suffix & "   ");
-   end Print;
+      Enable_Clock (Temperature_Sensor.ADC.all);
 
-begin
-   Enable_Clock (Temperature_Sensor.ADC.all);
+      Reset_All_ADC_Units;
 
-   Reset_All_ADC_Units;
+      Configure_Common_Properties
+        (Mode           => Independent,
+         Prescalar      => PCLK2_Div_2,
+         DMA_Mode       => Disabled,
+         Sampling_Delay => Sampling_Delay_5_Cycles);
 
-   Configure_Common_Properties
-     (Mode           => Independent,
-      Prescalar      => PCLK2_Div_2,
-      DMA_Mode       => Disabled,
-      Sampling_Delay => Sampling_Delay_5_Cycles);
+      Configure_Unit
+        (Temperature_Sensor.ADC.all,
+         Resolution => ADC_Resolution_12_Bits,
+         Alignment  => Right_Aligned);
 
-   Configure_Unit
-     (Temperature_Sensor.ADC.all,
-      Resolution => ADC_Resolution_12_Bits,
-      Alignment  => Right_Aligned);
+      Configure_Regular_Conversions
+        (Temperature_Sensor.ADC.all,
+         Trigger     => Software_Triggered,
+         Continuous  => False,
+         Enable_EOC  => True,
+         Conversions => All_Regular_Conversions);
 
-   Configure_Regular_Conversions
-     (Temperature_Sensor.ADC.all,
-      Trigger     => Software_Triggered,
-      Continuous  => False,
-      Enable_EOC  => True,
-      Conversions => All_Regular_Conversions);
+      Enable (ADC_1);
 
-   Enable (ADC_1);
+   end;
 
-   loop
+   function  Read_ADC_Temperature return Float is
+   begin
       Start_Conversion (Temperature_Sensor.ADC.all);
 
       Poll_For_Status (Temperature_Sensor.ADC.all, Regular_Channel_Conversion_Complete, Successful);
@@ -93,5 +85,7 @@ begin
       Temperature := ((V_Sense - V_At_25_Degrees) / Avg_Slope) + 25.0;
       --  see the RM, section 13.10, pg 411
 
-   end loop;
+      return Temperature;
+   end;
+
 end ADC_Temperature_Polling;

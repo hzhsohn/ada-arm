@@ -39,7 +39,7 @@ package body ADC_Other_GPIO_Polling is
    --  other device, and maps to ADC channel 5.
 
    All_Regular_Conversions : constant Regular_Channel_Conversions :=
-          (1 => (Channel => Input_Channel, Sample_Time => Sample_144_Cycles));
+     (1 => (Channel => Input_Channel, Sample_Time => Sample_144_Cycles));
 
    Raw : UInt32 := 0;
    Successful : Boolean;
@@ -56,36 +56,37 @@ package body ADC_Other_GPIO_Polling is
       Configure_IO (Input, (Mode => Mode_Analog, Resistors => Floating));
    end Configure_Analog_Input;
 
-begin
-   Initialize_LEDs;
 
-   Configure_Analog_Input;
+   procedure Init_ADC_Other is begin
 
-   Enable_Clock (Converter);
+      Configure_Analog_Input;
 
-   Reset_All_ADC_Units;
+      Enable_Clock (Converter);
 
-   Configure_Common_Properties
-     (Mode           => Independent,
-      Prescalar      => PCLK2_Div_2,
-      DMA_Mode       => Disabled,
-      Sampling_Delay => Sampling_Delay_5_Cycles);
+      Reset_All_ADC_Units;
 
-   Configure_Unit
-     (Converter,
-      Resolution => ADC_Resolution_12_Bits,
-      Alignment  => Right_Aligned);
+      Configure_Common_Properties
+        (Mode           => Independent,
+         Prescalar      => PCLK2_Div_2,
+         DMA_Mode       => Disabled,
+         Sampling_Delay => Sampling_Delay_5_Cycles);
 
-   Configure_Regular_Conversions
-     (Converter,
-      Continuous  => False,
-      Trigger     => Software_Triggered,
-      Enable_EOC  => True,
-      Conversions => All_Regular_Conversions);
+      Configure_Unit
+        (Converter,
+         Resolution => ADC_Resolution_12_Bits,
+         Alignment  => Right_Aligned);
 
-   Enable (Converter);
+      Configure_Regular_Conversions
+        (Converter,
+         Continuous  => False,
+         Trigger     => Software_Triggered,
+         Enable_EOC  => True,
+         Conversions => All_Regular_Conversions);
 
-   loop
+      Enable (Converter);
+
+   end;
+   function  Read_ADC_Other return UInt32 is begin
       Start_Conversion (Converter);
 
       Poll_For_Status (Converter, Regular_Channel_Conversion_Complete, Successful);
@@ -93,6 +94,8 @@ begin
          Raw := UInt32 (Conversion_Value (Converter));
       end if;
 
-      delay until Clock + Milliseconds (200); -- slow it down to ease reading
-   end loop;
+      return Raw;
+      --delay until Clock + Milliseconds (200); -- slow it down to ease reading
+   end;
+
 end ADC_Other_GPIO_Polling;
